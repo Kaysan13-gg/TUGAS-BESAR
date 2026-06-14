@@ -2,10 +2,6 @@ package main
 
 import "fmt"
 
-// =============================================
-// TIPE DATA
-// =============================================
-
 type Warga struct {
 	id         int
 	nama       string
@@ -23,13 +19,6 @@ type Setoran struct {
 type ArrWarga [100]Warga
 type ArrSetoran [500]Setoran
 
-// =============================================
-// FUNGSI DAN PROSEDUR: DATA WARGA
-// =============================================
-
-// tambahWarga menambah data warga baru ke array
-// IS: tabWarga berisi n warga
-// FS: tabWarga berisi n+1 warga dengan data baru
 func tambahWarga(tabWarga *ArrWarga, n *int, idCounter *int) {
 	if *n >= 100 {
 		fmt.Println("Data sudah penuh!")
@@ -52,9 +41,6 @@ func tambahWarga(tabWarga *ArrWarga, n *int, idCounter *int) {
 	fmt.Println("Warga berhasil ditambahkan! ID:", *idCounter)
 }
 
-// ubahWarga mengubah nama dan alamat warga berdasarkan ID
-// IS: tabWarga berisi n warga
-// FS: data warga dengan id yang cocok diperbarui
 func ubahWarga(tabWarga *ArrWarga, n int) {
 	var idCari int
 	fmt.Print("Masukkan ID warga yang ingin diubah: ")
@@ -78,9 +64,6 @@ func ubahWarga(tabWarga *ArrWarga, n int) {
 	fmt.Println("Data berhasil diubah!")
 }
 
-// hapusWarga menghapus data warga berdasarkan ID
-// IS: tabWarga berisi n warga
-// FS: warga dengan id yang cocok dihapus, n berkurang 1
 func hapusWarga(tabWarga *ArrWarga, n *int) {
 	var idCari int
 	fmt.Print("Masukkan ID warga yang ingin dihapus: ")
@@ -94,7 +77,6 @@ func hapusWarga(tabWarga *ArrWarga, n *int) {
 
 	namaHapus := tabWarga[idx].nama
 
-	// geser semua elemen ke kiri mulai dari posisi idx
 	i := idx
 	for i < *n-1 {
 		tabWarga[i] = tabWarga[i+1]
@@ -105,9 +87,6 @@ func hapusWarga(tabWarga *ArrWarga, n *int) {
 	fmt.Println("Warga", namaHapus, "berhasil dihapus!")
 }
 
-// tampilSemuaWarga menampilkan seluruh data warga
-// IS: tabWarga berisi n warga
-// FS: data semua warga tampil di layar
 func tampilSemuaWarga(tabWarga ArrWarga, n int) {
 	if n == 0 {
 		fmt.Println("Belum ada data warga.")
@@ -128,13 +107,6 @@ func tampilSemuaWarga(tabWarga ArrWarga, n int) {
 	fmt.Println("Total warga:", n)
 }
 
-// =============================================
-// FUNGSI DAN PROSEDUR: SETORAN SAMPAH
-// =============================================
-
-// catatSetoran mencatat setoran sampah dari warga
-// IS: tabSetoran berisi m setoran, tabWarga berisi n warga
-// FS: setoran baru ditambahkan, totalBerat warga bertambah
 func catatSetoran(tabSetoran *ArrSetoran, m *int, tabWarga *ArrWarga, n int) {
 	if *m >= 500 {
 		fmt.Println("Log setoran sudah penuh!")
@@ -171,9 +143,6 @@ func catatSetoran(tabSetoran *ArrSetoran, m *int, tabWarga *ArrWarga, n int) {
 	fmt.Printf("Setoran %.2f kg dari %s berhasil dicatat!\n", berat, tabWarga[idx].nama)
 }
 
-// tampilSetoranWarga menampilkan riwayat setoran milik warga tertentu
-// IS: tabSetoran berisi m setoran
-// FS: semua setoran dari idWarga yang dicari tampil di layar
 func tampilSetoranWarga(tabSetoran ArrSetoran, m int, tabWarga ArrWarga, n int) {
 	var idCari int
 	fmt.Print("Masukkan ID warga: ")
@@ -207,13 +176,6 @@ func tampilSetoranWarga(tabSetoran ArrSetoran, m int, tabWarga ArrWarga, n int) 
 	fmt.Printf("Total sampah terkumpul: %.2f kg\n", tabWarga[idx].totalBerat)
 }
 
-// =============================================
-// FUNGSI: PENCARIAN (SEARCHING)
-// =============================================
-
-// cariWargaByID mencari warga dengan Sequential Search berdasarkan ID
-// IS: tabWarga berisi n warga
-// FS: mengembalikan indeks warga yang cocok, atau -1 jika tidak ditemukan
 func cariWargaByID(tabWarga ArrWarga, n int, idCari int) int {
 	found := -1
 	i := 0
@@ -226,9 +188,6 @@ func cariWargaByID(tabWarga ArrWarga, n int, idCari int) int {
 	return found
 }
 
-// cariWargaByNama mencari warga dengan Sequential Search berdasarkan nama
-// IS: tabWarga berisi n warga
-// FS: mengembalikan indeks warga pertama yang namanya cocok, atau -1
 func cariWargaByNama(tabWarga ArrWarga, n int, namaCari string) int {
 	found := -1
 	i := 0
@@ -241,9 +200,6 @@ func cariWargaByNama(tabWarga ArrWarga, n int, namaCari string) int {
 	return found
 }
 
-// binarySearchByID mencari warga dengan Binary Search berdasarkan ID
-// IS: tabWarga berisi n warga, SUDAH TERURUT ASCENDING berdasarkan ID
-// FS: mengembalikan indeks warga yang cocok, atau -1 jika tidak ditemukan
 func binarySearchByID(tabWarga ArrWarga, n int, idCari int) int {
 	kiri := 0
 	kanan := n - 1
@@ -262,9 +218,6 @@ func binarySearchByID(tabWarga ArrWarga, n int, idCari int) int {
 	return found
 }
 
-// menuCariWarga menampilkan menu pilihan metode pencarian warga
-// IS: tabWarga berisi n warga
-// FS: hasil pencarian tampil di layar
 func menuCariWarga(tabWarga ArrWarga, n int) {
 	var pilih int
 	fmt.Println("Cari berdasarkan:")
@@ -318,13 +271,6 @@ func menuCariWarga(tabWarga ArrWarga, n int) {
 	}
 }
 
-// =============================================
-// PROSEDUR: PENGURUTAN (SORTING)
-// =============================================
-
-// selectionSort mengurutkan warga berdasarkan totalBerat secara descending
-// IS: tabWarga berisi n warga
-// FS: tabWarga terurut dari berat terbanyak ke paling sedikit (Selection Sort)
 func selectionSort(tabWarga *ArrWarga, n int) {
 	i := 0
 	for i < n-1 {
@@ -343,9 +289,6 @@ func selectionSort(tabWarga *ArrWarga, n int) {
 	}
 }
 
-// insertionSort mengurutkan warga berdasarkan totalBerat secara descending
-// IS: tabWarga berisi n warga
-// FS: tabWarga terurut dari berat terbanyak ke paling sedikit (Insertion Sort)
 func insertionSort(tabWarga *ArrWarga, n int) {
 	i := 1
 	for i < n {
@@ -360,9 +303,6 @@ func insertionSort(tabWarga *ArrWarga, n int) {
 	}
 }
 
-// menuUrutkan menampilkan menu pilihan metode sorting
-// IS: tabWarga berisi n warga
-// FS: tabWarga terurut sesuai pilihan dan ditampilkan
 func menuUrutkan(tabWarga *ArrWarga, n int) {
 	var pilih int
 	fmt.Println("Urutkan dengan:")
@@ -385,13 +325,6 @@ func menuUrutkan(tabWarga *ArrWarga, n int) {
 	tampilSemuaWarga(*tabWarga, n)
 }
 
-// =============================================
-// PROSEDUR: STATISTIK
-// =============================================
-
-// statistikMingguan menampilkan total dan rata-rata setoran dalam seminggu
-// IS: tabSetoran berisi m setoran
-// FS: statistik total berat, jumlah transaksi, dan rata-rata tampil di layar
 func statistikMingguan(tabSetoran ArrSetoran, m int) {
 	if m == 0 {
 		fmt.Println("Belum ada data setoran.")
@@ -414,13 +347,6 @@ func statistikMingguan(tabSetoran ArrSetoran, m int) {
 	fmt.Println("==============================")
 }
 
-// =============================================
-// PROSEDUR: TAMPILAN MENU
-// =============================================
-
-// tampilMenu menampilkan menu utama aplikasi
-// IS: -
-// FS: pilihan menu tampil di layar
 func tampilMenu() {
 	fmt.Println()
 	fmt.Println("======== WASTE-TRACK ========")
@@ -437,10 +363,6 @@ func tampilMenu() {
 	fmt.Println("=============================")
 	fmt.Print("Pilihan: ")
 }
-
-// =============================================
-// MAIN
-// =============================================
 
 func main() {
 	var tabWarga ArrWarga
