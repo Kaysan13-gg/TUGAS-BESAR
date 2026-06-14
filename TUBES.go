@@ -9,7 +9,7 @@ type Warga struct {
 	totalBerat float64
 }
 
-type Setoran struct {
+type Setoran struct { 
 	idWarga int
 	tanggal string
 	jenis   string
