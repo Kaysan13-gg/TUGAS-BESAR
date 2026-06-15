@@ -8,7 +8,11 @@ type Warga struct {
 	alamat     string
 	totalBerat float64
 }
+<<<<<<< Updated upstream
 
+=======
+	
+>>>>>>> Stashed changes
 type Setoran struct { 
 	idWarga int
 	tanggal string
